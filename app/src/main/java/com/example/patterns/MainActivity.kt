@@ -7,10 +7,12 @@ import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.patterns.builderpattern.buildermethod.UserBuilder
-import com.example.patterns.builderpattern.objectdotbuildermethod.User
+import com.example.patterns.builderpattern.objectdotbuildermethod.alertdialogexample.CustomAlertDialog
+import com.example.patterns.builderpattern.objectdotbuildermethod.userexample.User
 import com.example.patterns.factorypattern.IPicassoListener
 import com.example.patterns.factorypattern.factory.ImagePrinterFactory
 import com.example.patterns.factorypattern.IGlideListener
+import com.example.patterns.singletonpattern.SingletonObject
 import com.example.patterns.strategypattern.baseclass.Calculate
 import com.example.patterns.strategypattern.strategies.Multiplication
 import com.example.patterns.strategypattern.strategies.Subtraction
@@ -27,6 +29,9 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
         builderPatternResult()
         objectDotBuilderPatternResult()
         factoryPatternResult()
+        singletonPattern()
+        customDialogBuilderPatternResult()
+
 
     }
 
@@ -76,6 +81,23 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
 
     }
 
+    private fun customDialogBuilderPatternResult() {
+
+        CustomAlertDialog.Builder(this)
+            .setDialogTitle("Info Dialog")
+            .setDialogMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+            .setFirstButtonName("OK")
+            .setSecondButtonName("CANCEL")
+            .setFirstButtonBackgroundDrawable(R.drawable.button_selector)
+            .setSecondButtonBackgroundDrawable(R.drawable.button_selector)
+            .setFirstButtonTextColor(android.R.color.white)
+            .setSecondButtonTextColor(android.R.color.white)
+            .setCancelable(true)
+            .hideSecondButton(false)
+            .showCustomDialog()
+
+    }
+
     private fun factoryPatternResult() {
 
         ImagePrinterFactory(this, this).getImagePrinter(
@@ -86,6 +108,7 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
         )
     }
 
+    //region Glide & Picasso işlemleri
     override fun showPicassoSuccessToast() {
         Toast.makeText(this, "Picasso çalıştı", Toast.LENGTH_LONG).show()
     }
@@ -115,5 +138,12 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
     override fun showGlideSuccessToast() {
         Toast.makeText(this, "Glide çalıştı ", Toast.LENGTH_LONG).show()
     }
+    //endregion
 
+    private fun singletonPattern() {
+
+        //SingletonObject.getInstance() diyerek objeyi tek seferlik yarattık. Şimdi içinde istediğimiz metoda erişebiliriz:
+        Log.v("mExample", SingletonObject.getInstance().getNumber().toString())
+
+    }
 }

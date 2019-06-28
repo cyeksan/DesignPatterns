@@ -1,4 +1,4 @@
-package com.example.patterns.builderpattern.objectdotbuildermethod
+package com.example.patterns.builderpattern.objectdotbuildermethod.userexample
 
 class User {
 
