@@ -17,7 +17,11 @@ import com.example.patterns.strategypattern.baseclass.Calculate
 import com.example.patterns.strategypattern.strategies.Multiplication
 import com.example.patterns.strategypattern.strategies.Subtraction
 import com.example.patterns.strategypattern.strategies.Summation
+import com.example.patterns.visitorpattern.impl.ShoppingCardImpl
+import com.example.patterns.visitorpattern.items.Book
+import com.example.patterns.visitorpattern.items.Fruit
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
 
@@ -29,9 +33,9 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
         builderPatternResult()
         objectDotBuilderPatternResult()
         factoryPatternResult()
-        singletonPattern()
+        singletonPatternResult()
         customDialogBuilderPatternResult()
-
+        visitorPatternResult()
 
     }
 
@@ -140,10 +144,30 @@ class MainActivity : AppCompatActivity(), IPicassoListener, IGlideListener {
     }
     //endregion
 
-    private fun singletonPattern() {
+    private fun singletonPatternResult() {
 
         //SingletonObject.getInstance() diyerek objeyi tek seferlik yarattık. Şimdi içinde istediğimiz metoda erişebiliriz:
         Log.v("mExample", SingletonObject.getInstance().getNumber().toString())
 
+    }
+
+    private fun visitorPatternResult() {
+
+        val items = arrayOf(
+            Book(404.0, 1234),
+            Book(16.5, 4567),
+            Fruit(1.2, "Strawberry", 3.5),
+            Fruit(5.0, "Watermelon", 10.0)
+        )
+
+        var sum = 0.0
+
+        for(i in items) {
+
+            sum += i.accept(ShoppingCardImpl())!!
+
+        }
+
+        Log.v("visitorPatternResult","Total cost: $sum")
     }
 }
