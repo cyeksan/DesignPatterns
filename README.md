@@ -5,4 +5,4 @@ An Android project demonstrating how to use various design patterns in Kotlin.
 * Builder Pattern
 * Factory Pattern
 * Strategy Pattern
-* Visitor Pattern
+* Visitor Pattern 
